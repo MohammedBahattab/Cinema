@@ -14,7 +14,7 @@
 <div class="row g-4 mb-5">
     <div class="col-md-6 col-xl-3">
         <div class="stat-card">
-            <div class="stat-icon" style="background: rgba(59, 130, 246, 0.1); color: #3b82f6;">
+            <div class="stat-icon stat-movies">
                 <i class="fas fa-film"></i>
             </div>
             <div class="stat-content">
@@ -25,7 +25,7 @@
     </div>
     <div class="col-md-6 col-xl-3">
         <div class="stat-card">
-            <div class="stat-icon" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">
+            <div class="stat-icon stat-showtimes">
                 <i class="fas fa-calendar-check"></i>
             </div>
             <div class="stat-content">
@@ -36,7 +36,7 @@
     </div>
     <div class="col-md-6 col-xl-3">
         <div class="stat-card">
-            <div class="stat-icon" style="background: rgba(245, 158, 11, 0.1); color: #f59e0b;">
+            <div class="stat-icon stat-bookings">
                 <i class="fas fa-ticket-alt"></i>
             </div>
             <div class="stat-content">
@@ -47,7 +47,7 @@
     </div>
     <div class="col-md-6 col-xl-3">
         <div class="stat-card">
-            <div class="stat-icon" style="background: rgba(139, 92, 246, 0.1); color: #8b5cf6;">
+            <div class="stat-icon stat-halls">
                 <i class="fas fa-door-open"></i>
             </div>
             <div class="stat-content">
@@ -83,7 +83,7 @@
                                 <td class="ps-4 fw-bold">#{{ str_pad($booking->id, 6, '0', STR_PAD_LEFT) }}</td>
                                 <td>
                                     <div class="d-flex align-items-center gap-2">
-                                        <div class="bg-secondary rounded-circle d-flex align-items-center justify-content-center" style="width:32px;height:32px;font-size:0.8rem;">
+                                        <div class="bg-secondary rounded-circle d-flex align-items-center justify-content-center user-avatar-sm">
                                             <i class="fas fa-user"></i>
                                         </div>
                                         <div>

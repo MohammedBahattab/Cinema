@@ -14,7 +14,7 @@
             @error('name')<span class="text-danger">{{ $message }}</span>@enderror
         </form>
 
-        <div class="table-responsive bg-white rounded p-3 text-dark">
+        <div class="table-responsive bg-white rounded p-3 text-dark admin-table-card">
             <table class="table table-bordered table-hover">
                 <thead class="table-dark">
                     <tr>

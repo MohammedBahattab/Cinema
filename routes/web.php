@@ -43,7 +43,11 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     
     Route::get('/crew', [CrewController::class, 'index'])->name('crew.index');
     Route::post('/crew/role', [CrewController::class, 'storeRole'])->name('crew.storeRole');
+    Route::delete('/crew/role/{role}', [CrewController::class, 'destroyRole'])->name('crew.destroyRole');
     Route::post('/crew/member', [CrewController::class, 'storeCrew'])->name('crew.storeCrew');
+    Route::get('/crew/member/{crew}/edit', [CrewController::class, 'edit'])->name('crew.edit');
+    Route::put('/crew/member/{crew}', [CrewController::class, 'update'])->name('crew.update');
+    Route::delete('/crew/member/{crew}', [CrewController::class, 'destroy'])->name('crew.destroy');
     
     Route::resource('halls', HallController::class)->except(['edit', 'update']);
     Route::resource('showtimes', ShowtimeController::class)->only(['index', 'create', 'store', 'destroy']);

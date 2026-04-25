@@ -1,58 +1,7 @@
 @extends('layouts.app')
 
 @push('styles')
-<style>
-    .movie-hero {
-        position: relative;
-        border-radius: 20px;
-        overflow: hidden;
-        margin-bottom: 3rem;
-        box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-    }
-    .movie-hero img {
-        width: 100%;
-        height: 60vh;
-        object-fit: cover;
-        opacity: 0.5;
-    }
-    .movie-hero-overlay {
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(to top, var(--bg-primary) 0%, transparent 100%);
-    }
-    .movie-hero-content {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        padding: 3rem;
-        display: flex;
-        gap: 2rem;
-        align-items: flex-end;
-    }
-    .movie-poster {
-        width: 250px;
-        border-radius: 12px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-        border: 2px solid var(--glass-border);
-        transform: translateY(20px);
-    }
-    .showtime-card {
-        background: var(--glass);
-        border: 1px solid var(--glass-border);
-        border-radius: 12px;
-        padding: 1.5rem;
-        transition: all 0.3s ease;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .showtime-card:hover {
-        background: rgba(229,9,20,0.05);
-        border-color: rgba(229,9,20,0.3);
-        transform: translateX(10px);
-    }
-</style>
+    <link href="{{ asset('css/movie_show.css') }}" rel="stylesheet">
 @endpush
 
 @section('content')
@@ -60,9 +9,9 @@
     @if($movie->banner_image)
         <img src="{{ $movie->banner_image }}" alt="Banner">
     @elseif($movie->poster_image)
-        <img src="{{ str_starts_with($movie->poster_image, 'http') ? $movie->poster_image : asset('storage/' . $movie->poster_image) }}" style="filter: blur(10px);" alt="Banner">
+        <img src="{{ str_starts_with($movie->poster_image, 'http') ? $movie->poster_image : asset('storage/' . $movie->poster_image) }}" class="banner-blur" alt="Banner">
     @else
-        <div style="height: 60vh; background: var(--bg-secondary);"></div>
+        <div class="empty-banner"></div>
     @endif
     <div class="movie-hero-overlay"></div>
     <div class="movie-hero-content flex-column flex-md-row text-center text-md-start">
@@ -96,7 +45,7 @@
             @forelse($movie->crew as $member)
             <div class="col-md-4">
                 <div class="glass-card p-3 d-flex align-items-center gap-3">
-                    <div class="bg-dark rounded-circle d-flex align-items-center justify-content-center" style="width:50px;height:50px;">
+                    <div class="bg-dark rounded-circle d-flex align-items-center justify-content-center crew-avatar-container">
                         <i class="fas fa-user text-secondary"></i>
                     </div>
                     <div>

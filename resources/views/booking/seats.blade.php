@@ -1,22 +1,7 @@
 @extends('layouts.app')
 
 @push('styles')
-<style>
-    .seat-map-container {
-        background: var(--bg-secondary);
-        border: 1px solid var(--glass-border);
-        border-radius: 24px;
-        padding: 3rem;
-        box-shadow: inset 0 0 50px rgba(0,0,0,0.5);
-    }
-    .booking-summary {
-        background: var(--glass);
-        border: 1px solid var(--accent);
-        border-radius: 16px;
-        position: sticky;
-        top: 100px;
-    }
-</style>
+    <link href="{{ asset('css/seats.css') }}" rel="stylesheet">
 @endpush
 
 @section('content')
@@ -41,12 +26,12 @@
             
             <form action="{{ route('booking.checkout', $showtime->id) }}" method="POST" id="seatForm" class="mt-5 text-center">
                 @csrf
-                <div class="seats-container" style="overflow-x: auto; white-space: nowrap; padding-bottom: 1rem;">
+                <div class="seats-container seats-scroll">
                     @php $rows = $showtime->hall->seats->groupBy('row_number'); @endphp
 
                     @foreach($rows as $rowNumber => $seats)
                         <div class="d-flex justify-content-center align-items-center mb-2">
-                            <span class="text-secondary fw-bold me-4" style="width: 25px;">{{ $rowNumber }}</span>
+                            <span class="text-secondary fw-bold me-4 seat-row-label">{{ $rowNumber }}</span>
                             @foreach($seats as $seat)
                                 @php $isBooked = in_array($seat->id, $bookedSeats); @endphp
                                 <div class="seat-btn {{ $isBooked ? 'booked' : 'available' }}" 
@@ -56,7 +41,7 @@
                                     {{ $seat->seat_number }}
                                 </div>
                             @endforeach
-                            <span class="text-secondary fw-bold ms-4" style="width: 25px;">{{ $rowNumber }}</span>
+                            <span class="text-secondary fw-bold ms-4 seat-row-label">{{ $rowNumber }}</span>
                         </div>
                     @endforeach
                 </div>
@@ -65,9 +50,9 @@
         </div>
 
         <div class="d-flex justify-content-center gap-4 mt-4">
-            <div class="d-flex align-items-center gap-2"><div class="seat-btn available" style="pointer-events:none; width:25px;height:25px;"></div><span class="text-secondary">Available</span></div>
-            <div class="d-flex align-items-center gap-2"><div class="seat-btn booked" style="pointer-events:none; width:25px;height:25px;"></div><span class="text-secondary">Booked</span></div>
-            <div class="d-flex align-items-center gap-2"><div class="seat-btn selected" style="pointer-events:none; width:25px;height:25px;"></div><span class="text-secondary">Selected</span></div>
+            <div class="d-flex align-items-center gap-2"><div class="seat-btn available seat-legend-icon"></div><span class="text-secondary">Available</span></div>
+            <div class="d-flex align-items-center gap-2"><div class="seat-btn booked seat-legend-icon"></div><span class="text-secondary">Booked</span></div>
+            <div class="d-flex align-items-center gap-2"><div class="seat-btn selected seat-legend-icon"></div><span class="text-secondary">Selected</span></div>
         </div>
     </div>
 
@@ -86,8 +71,8 @@
             </div>
 
             <div class="p-3 bg-dark rounded mb-4">
-                <div class="text-secondary mb-1" style="font-size: 0.85rem;">Selected:</div>
-                <div id="seatLabels" class="fw-bold text-white" style="min-height: 24px;">None</div>
+                <div class="text-secondary mb-1 selected-label-container">Selected:</div>
+                <div id="seatLabels" class="fw-bold text-white selected-seats-box">None</div>
             </div>
 
             <div class="d-flex justify-content-between mb-4 border-top border-secondary pt-3">

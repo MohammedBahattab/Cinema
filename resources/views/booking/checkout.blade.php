@@ -74,7 +74,7 @@
                         </div>
                         @else
                         <div class="text-center py-4">
-                            <div class="bg-dark rounded-circle d-inline-flex align-items-center justify-content-center mb-3 border border-secondary" style="width:80px;height:80px;">
+                            <div class="bg-dark rounded-circle d-inline-flex align-items-center justify-content-center mb-3 border border-secondary w-80px h-80px">
                                 <i class="fas fa-user-check fa-2x text-success"></i>
                             </div>
                             <h5>Logged in as <span class="text-warning">{{ auth()->user()->name }}</span></h5>
