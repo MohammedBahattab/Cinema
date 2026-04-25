@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<<<<<<< HEAD
     <style>
         :root {
             --bg-primary: #0a0a1a;
@@ -195,6 +196,9 @@
         .stat-content p { color: var(--text-secondary); margin: 0; font-size: 0.9rem; }
 
     </style>
+=======
+    <link href="{{ asset('css/admin_custom.css') }}" rel="stylesheet">
+>>>>>>> 6e22249051c96f03f5b85cb386105d8d06e856a7
 </head>
 <body>
 

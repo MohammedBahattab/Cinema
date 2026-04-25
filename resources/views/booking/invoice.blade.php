@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @push('styles')
+<<<<<<< HEAD
 <style>
     .invoice-container {
         background: radial-gradient(circle at top right, var(--bg-secondary), var(--bg-primary));
@@ -59,6 +60,9 @@
         .detail-box { background: transparent !important; border: 1px solid #ddd; }
     }
 </style>
+=======
+    <link href="{{ asset('css/invoice.css') }}" rel="stylesheet">
+>>>>>>> 6e22249051c96f03f5b85cb386105d8d06e856a7
 @endpush
 
 @section('content')
@@ -130,10 +134,17 @@
                         </thead>
                         <tbody>
                             @foreach($booking->seats as $seat)
+<<<<<<< HEAD
                             <tr class="border-bottom border-secondary" style="border-bottom-style: dashed !important;">
                                 <td class="py-3">
                                     <div class="d-flex align-items-center gap-3">
                                         <div class="bg-dark rounded p-2 text-center" style="width:40px;">
+=======
+                            <tr class="border-bottom border-secondary invoice-row-dashed">
+                                <td class="py-3">
+                                    <div class="d-flex align-items-center gap-3">
+                                        <div class="bg-dark rounded p-2 text-center w-40px">
+>>>>>>> 6e22249051c96f03f5b85cb386105d8d06e856a7
                                             <i class="fas fa-chair text-secondary"></i>
                                         </div>
                                         <span class="fw-bold">Seat {{ $seat->seat_number }}</span>
@@ -149,7 +160,11 @@
                 
                 @php $total = $booking->payments->sum('amount'); @endphp
                 <div class="d-flex justify-content-end mt-4 pt-3 border-top border-secondary">
+<<<<<<< HEAD
                     <div class="text-end" style="width: 300px;">
+=======
+                    <div class="text-end invoice-total-box">
+>>>>>>> 6e22249051c96f03f5b85cb386105d8d06e856a7
                         <div class="d-flex justify-content-between mb-2">
                             <span class="text-secondary">Subtotal</span>
                             <span class="text-white">${{ number_format($total, 2) }}</span>

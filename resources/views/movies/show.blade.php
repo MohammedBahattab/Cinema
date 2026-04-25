@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @push('styles')
+<<<<<<< HEAD
 <style>
     .movie-hero {
         position: relative;
@@ -53,6 +54,9 @@
         transform: translateX(10px);
     }
 </style>
+=======
+    <link href="{{ asset('css/movie_show.css') }}" rel="stylesheet">
+>>>>>>> 6e22249051c96f03f5b85cb386105d8d06e856a7
 @endpush
 
 @section('content')
@@ -60,9 +64,15 @@
     @if($movie->banner_image)
         <img src="{{ $movie->banner_image }}" alt="Banner">
     @elseif($movie->poster_image)
+<<<<<<< HEAD
         <img src="{{ str_starts_with($movie->poster_image, 'http') ? $movie->poster_image : asset('storage/' . $movie->poster_image) }}" style="filter: blur(10px);" alt="Banner">
     @else
         <div style="height: 60vh; background: var(--bg-secondary);"></div>
+=======
+        <img src="{{ str_starts_with($movie->poster_image, 'http') ? $movie->poster_image : asset('storage/' . $movie->poster_image) }}" class="banner-blur" alt="Banner">
+    @else
+        <div class="empty-banner"></div>
+>>>>>>> 6e22249051c96f03f5b85cb386105d8d06e856a7
     @endif
     <div class="movie-hero-overlay"></div>
     <div class="movie-hero-content flex-column flex-md-row text-center text-md-start">
@@ -96,7 +106,11 @@
             @forelse($movie->crew as $member)
             <div class="col-md-4">
                 <div class="glass-card p-3 d-flex align-items-center gap-3">
+<<<<<<< HEAD
                     <div class="bg-dark rounded-circle d-flex align-items-center justify-content-center" style="width:50px;height:50px;">
+=======
+                    <div class="bg-dark rounded-circle d-flex align-items-center justify-content-center crew-avatar-container">
+>>>>>>> 6e22249051c96f03f5b85cb386105d8d06e856a7
                         <i class="fas fa-user text-secondary"></i>
                     </div>
                     <div>
