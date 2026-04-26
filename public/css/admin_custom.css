@@ -1,4 +1,5 @@
 :root {
+    /* ── الألوان الأساسية ── */
     --bg-primary: #0a0a1a;
     --bg-secondary: #12122a;
     --bg-sidebar: #05050f;
@@ -6,9 +7,42 @@
     --accent-hover: #ff1a25;
     --text-primary: #ffffff;
     --text-secondary: #8b8b9e;
+    
+    /* ── ألوان الإحصائيات (Stat Colors) ── */
+    --stat-blue: #3b82f6;
+    --stat-green: #10b981;
+    --stat-orange: #f59e0b;
+    --stat-purple: #8b5cf6;
+
+    /* ── ألوان البادجات (Badge Colors - New) ── */
+    --badge-bg-yellow: #ffc107;
+    --badge-text-dark: #212529;
+    --badge-border-yellow: #d39e00;
+    --badge-role-text: #ffffff;
+
+    /* ── الشفافية (Alpha/RGBA Values) ── */
     --glass: rgba(255, 255, 255, 0.04);
+    --glass-focus: rgba(255, 255, 255, 0.08);
     --glass-border: rgba(255, 255, 255, 0.08);
-    --gradient-1: linear-gradient(135deg, #e50914 0%, #b20710 100%);
+    --nav-active-bg: rgba(229, 9, 20, 0.1);
+    --topbar-bg: rgba(10, 10, 26, 0.85);
+    --card-header-bg: rgba(0, 0, 0, 0.2);
+    --table-header-bg: rgba(0, 0, 0, 0.4);
+    --input-bg: rgba(255, 255, 255, 0.05);
+    --accent-glow: rgba(229, 9, 20, 0.15);
+    --stat-icon-bg: rgba(229, 9, 20, 0.1);
+    --text-box: rgba(255, 255, 255, 0.4);
+    
+    /* خلفيات أيقونات الإحصائيات الملونة */
+    --bg-stat-blue: rgba(59, 130, 246, 0.1);
+    --bg-stat-green: rgba(16, 185, 129, 0.1);
+    --bg-stat-orange: rgba(245, 158, 11, 0.1);
+    --bg-stat-purple: rgba(139, 92, 246, 0.1);
+
+    /* ── التدرجات والظلال ── */
+    --gradient-1: linear-gradient(135deg, var(--accent) 0%, #b20710 100%);
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    --btn-shadow: 0 4px 15px rgba(229, 9, 20, 0.4);
 }
 
 body {
@@ -74,7 +108,7 @@ body {
 
 .nav-link.active {
     border-left: 4px solid var(--accent);
-    background: rgba(229, 9, 20, 0.1);
+    background: var(--nav-active-bg);
 }
 
 /* ── Main Content ── */
@@ -89,7 +123,7 @@ body {
 /* ── Topbar ── */
 .topbar {
     height: 70px;
-    background: rgba(10, 10, 26, 0.85);
+    background: var(--topbar-bg);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--glass-border);
     display: flex;
@@ -111,11 +145,11 @@ body {
     background: var(--bg-secondary);
     border: 1px solid var(--glass-border);
     border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--card-shadow);
 }
 
 .card-header {
-    background: rgba(0, 0, 0, 0.2);
+    background: var(--card-header-bg);
     border-bottom: 1px solid var(--glass-border);
     padding: 1rem 1.5rem;
     font-weight: 600;
@@ -137,7 +171,7 @@ body {
 }
 
 .table-dark th {
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: var(--table-header-bg);
     border-color: var(--glass-border);
     font-weight: 600;
     text-transform: uppercase;
@@ -155,19 +189,21 @@ body {
 /* ── Forms & Buttons ── */
 .form-control,
 .form-select {
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--input-bg);
     border: 1px solid var(--glass-border);
     color: var(--text-primary);
     border-radius: 8px;
     padding: 0.6rem 1rem;
+    color-scheme: dark;
 }
 
 .form-control:focus,
 .form-select:focus {
-    background: rgba(255, 255, 255, 0.08);
+    background: var(--glass-focus);
     border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.15);
+    box-shadow: 0 0 0 3px var(--accent-glow);
     color: var(--text-primary);
+    outline: none;
 }
 
 .btn-primary {
@@ -177,7 +213,7 @@ body {
 
 .btn-primary:hover {
     background: var(--gradient-1);
-    box-shadow: 0 4px 15px rgba(229, 9, 20, 0.4);
+    box-shadow: var(--btn-shadow);
     transform: translateY(-2px);
 }
 
@@ -190,7 +226,9 @@ body {
     display: flex;
     align-items: center;
     gap: 1rem;
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
+    min-height: 120px; 
+    height: 100%;
 }
 
 .stat-card:hover {
@@ -198,10 +236,11 @@ body {
 }
 
 .stat-icon {
+    flex-shrink: 0;
     width: 60px;
     height: 60px;
     border-radius: 12px;
-    background: rgba(229, 9, 20, 0.1);
+    background: var(--stat-icon-bg);
     color: var(--accent);
     display: flex;
     align-items: center;
@@ -209,16 +248,52 @@ body {
     font-size: 1.8rem;
 }
 
+.stat-content {
+    flex: 1;
+    word-break: break-word;
+}
+
 .stat-content h3 {
     font-size: 1.8rem;
     font-weight: 700;
     margin: 0;
+    line-height: 1.2;
 }
 
 .stat-content p {
     color: var(--text-secondary);
-    margin: 0;
+    margin: 4px 0 0;
     font-size: 0.9rem;
+    line-height: 1.4;
+    display: block; 
+}
+
+/* تعديل خيارات الـ Select */
+.form-select option {
+    background-color: var(--bg-sidebar);
+    color: var(--text-primary);
+}
+
+.form-control::placeholder {
+    color: var(--text-box) !important;
+}
+
+/* ── Badges (Crew & Movies) ── */
+.movie-badge {
+    background-color: var(--badge-bg-yellow) !important;
+    color: var(--badge-text-dark) !important;
+    border: 1px solid var(--badge-border-yellow);
+    border-radius: 50px;
+    padding: 5px 12px;
+    font-weight: 500;
+    display: inline-block;
+}
+
+.movie-role-text {
+    color: var(--badge-role-text);
+    font-size: 0.85em;
+    margin-left: 4px;
+    font-weight: bold;
 }
 
 /* ── Custom Utility Classes ── */
@@ -228,10 +303,11 @@ body {
 .w-120px { width: 120px; }
 .w-150px { width: 150px; }
 .w-200px { width: 200px; }
-.stat-movies { background: rgba(59, 130, 246, 0.1); color: #3b82f6; }
-.stat-showtimes { background: rgba(16, 185, 129, 0.1); color: #10b981; }
-.stat-bookings { background: rgba(245, 158, 11, 0.1); color: #f59e0b; }
-.stat-halls { background: rgba(139, 92, 246, 0.1); color: #8b5cf6; }
+
+.stat-movies { background: var(--bg-stat-blue); color: var(--stat-blue); }
+.stat-showtimes { background: var(--bg-stat-green); color: var(--stat-green); }
+.stat-bookings { background: var(--bg-stat-orange); color: var(--stat-orange); }
+.stat-halls { background: var(--bg-stat-purple); color: var(--stat-purple); }
 
 .user-avatar-sm {
     width: 32px;

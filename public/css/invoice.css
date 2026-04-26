@@ -1,10 +1,27 @@
+:root {
+    /* -- ألوان الفاتورة -- */
+    --invoice-bg-start: var(--bg-secondary);
+    --invoice-bg-end: var(--bg-primary);
+    --invoice-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+    --invoice-border-dashed: rgba(255, 255, 255, 0.1);
+    
+    /* -- العلامة المائية والتفاصيل -- */
+    --watermark-color: rgba(255, 255, 255, 0.02);
+    --detail-box-bg: rgba(0, 0, 0, 0.3);
+    
+    /* -- ألوان الطباعة -- */
+    --print-bg: #ffffff;
+    --print-text: #000000;
+    --print-border: #dddddd;
+}
+
 .invoice-container {
-    background: radial-gradient(circle at top right, var(--bg-secondary), var(--bg-primary));
+    background: radial-gradient(circle at top right, var(--invoice-bg-start), var(--invoice-bg-end));
     border: 1px solid var(--glass-border);
     border-radius: 20px;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+    box-shadow: var(--invoice-shadow);
 }
 
 .invoice-container::before {
@@ -24,14 +41,14 @@
     transform: translate(-50%, -50%) rotate(-30deg);
     font-size: 10rem;
     font-weight: 800;
-    color: rgba(255, 255, 255, 0.02);
+    color: var(--watermark-color);
     pointer-events: none;
     z-index: 0;
     white-space: nowrap;
 }
 
 .invoice-header {
-    border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+    border-bottom: 1px dashed var(--invoice-border-dashed);
     padding-bottom: 2rem;
     margin-bottom: 2rem;
 }
@@ -42,7 +59,7 @@
 }
 
 .detail-box {
-    background: rgba(0, 0, 0, 0.3);
+    background: var(--detail-box-bg);
     border-radius: 12px;
     padding: 1.5rem;
     height: 100%;
@@ -53,11 +70,16 @@
     width: 300px;
 }
 
+.invoice-row-dashed {
+    border-bottom-style: dashed !important;
+}
+
+/* ── Print Media ── */
 @media print {
     body * {
         visibility: hidden;
-        background: white !important;
-        color: black !important;
+        background: var(--print-bg) !important;
+        color: var(--print-text) !important;
     }
 
     .invoice-container,
@@ -72,7 +94,7 @@
         width: 100%;
         border: none;
         box-shadow: none;
-        background: white !important;
+        background: var(--print-bg) !important;
     }
 
     .invoice-container::before {
@@ -86,20 +108,16 @@
     }
 
     .text-warning {
-        color: #000 !important;
+        color: var(--print-text) !important;
     }
 
     .badge {
-        border: 1px solid #000;
-        color: #000 !important;
+        border: 1px solid var(--print-text);
+        color: var(--print-text) !important;
     }
 
     .detail-box {
         background: transparent !important;
-        border: 1px solid #ddd;
+        border: 1px solid var(--print-border);
     }
-}
-
-.invoice-row-dashed {
-    border-bottom-style: dashed !important;
 }

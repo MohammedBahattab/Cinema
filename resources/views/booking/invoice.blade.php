@@ -1,68 +1,7 @@
 @extends('layouts.app')
 
 @push('styles')
-<<<<<<< HEAD
-<style>
-    .invoice-container {
-        background: radial-gradient(circle at top right, var(--bg-secondary), var(--bg-primary));
-        border: 1px solid var(--glass-border);
-        border-radius: 20px;
-        position: relative;
-        overflow: hidden;
-        box-shadow: 0 30px 60px rgba(0,0,0,0.6);
-    }
-    .invoice-container::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 6px;
-        background: var(--gradient-1);
-    }
-    .watermark {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) rotate(-30deg);
-        font-size: 10rem;
-        font-weight: 800;
-        color: rgba(255,255,255,0.02);
-        pointer-events: none;
-        z-index: 0;
-        white-space: nowrap;
-    }
-    .invoice-header {
-        border-bottom: 1px dashed rgba(255,255,255,0.1);
-        padding-bottom: 2rem;
-        margin-bottom: 2rem;
-    }
-    .invoice-content { position: relative; z-index: 1; }
-    .detail-box {
-        background: rgba(0,0,0,0.3);
-        border-radius: 12px;
-        padding: 1.5rem;
-        height: 100%;
-        border: 1px solid var(--glass-border);
-    }
-    
-    @media print {
-        body * { visibility: hidden; background: white !important; color: black !important; }
-        .invoice-container, .invoice-container * { visibility: visible; }
-        .invoice-container { 
-            position: absolute; left: 0; top: 0; width: 100%; 
-            border: none; box-shadow: none; background: white !important;
-        }
-        .invoice-container::before { display: none; }
-        .btn-print, .navbar-cinema, .footer-cinema { display: none !important; }
-        .text-warning { color: #000 !important; }
-        .badge { border: 1px solid #000; color: #000 !important; }
-        .detail-box { background: transparent !important; border: 1px solid #ddd; }
-    }
-</style>
-=======
     <link href="{{ asset('css/invoice.css') }}" rel="stylesheet">
->>>>>>> 6e22249051c96f03f5b85cb386105d8d06e856a7
 @endpush
 
 @section('content')
@@ -88,9 +27,15 @@
                     </div>
                     <div class="text-end">
                         <div class="fs-5 fw-bold text-white mb-1">Booking #{{ str_pad($booking->id, 8, '0', STR_PAD_LEFT) }}</div>
-                        <span class="badge bg-success bg-opacity-20 text-success border border-success px-3 py-2 rounded-pill">
-                            <i class="fas fa-check-circle me-1"></i> {{ strtoupper($booking->status) }}
-                        </span>
+                         <div class="mt-2">
+                            @if($booking->status == 'confirmed')
+                             <span class="badge bg-success text-white border border-success rounded-pill px-3 py-2">Confirmed</span>
+                            @elseif($booking->status == 'pending')
+                             <span class="badge bg-warning text-white border border-warning rounded-pill px-3 py-2">Pending</span>
+                            @else
+                             <span class="badge bg-danger text-white border border-danger rounded-pill px-3 py-2">{{ ucfirst($booking->status) }}</span>
+                            @endif
+                        </div>
                     </div>
                 </div>
 
@@ -134,17 +79,10 @@
                         </thead>
                         <tbody>
                             @foreach($booking->seats as $seat)
-<<<<<<< HEAD
-                            <tr class="border-bottom border-secondary" style="border-bottom-style: dashed !important;">
-                                <td class="py-3">
-                                    <div class="d-flex align-items-center gap-3">
-                                        <div class="bg-dark rounded p-2 text-center" style="width:40px;">
-=======
                             <tr class="border-bottom border-secondary invoice-row-dashed">
                                 <td class="py-3">
                                     <div class="d-flex align-items-center gap-3">
                                         <div class="bg-dark rounded p-2 text-center w-40px">
->>>>>>> 6e22249051c96f03f5b85cb386105d8d06e856a7
                                             <i class="fas fa-chair text-secondary"></i>
                                         </div>
                                         <span class="fw-bold">Seat {{ $seat->seat_number }}</span>
@@ -160,11 +98,7 @@
                 
                 @php $total = $booking->payments->sum('amount'); @endphp
                 <div class="d-flex justify-content-end mt-4 pt-3 border-top border-secondary">
-<<<<<<< HEAD
-                    <div class="text-end" style="width: 300px;">
-=======
                     <div class="text-end invoice-total-box">
->>>>>>> 6e22249051c96f03f5b85cb386105d8d06e856a7
                         <div class="d-flex justify-content-between mb-2">
                             <span class="text-secondary">Subtotal</span>
                             <span class="text-white">${{ number_format($total, 2) }}</span>

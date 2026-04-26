@@ -5,26 +5,17 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Crew;
 use App\Models\CrewRole;
-<<<<<<< HEAD
-=======
 use App\Models\Movie;
->>>>>>> 6e22249051c96f03f5b85cb386105d8d06e856a7
 use Illuminate\Http\Request;
 
 class CrewController extends Controller
 {
     public function index()
     {
-<<<<<<< HEAD
-        $crews = Crew::all();
-        $roles = CrewRole::all();
-        return view('admin.crew.index', compact('crews', 'roles'));
-=======
         $crews = Crew::with('movies')->get();
         $roles = CrewRole::all();
         $movies = Movie::all();
         return view('admin.crew.index', compact('crews', 'roles', 'movies'));
->>>>>>> 6e22249051c96f03f5b85cb386105d8d06e856a7
     }
 
     public function storeRole(Request $request)
@@ -41,12 +32,6 @@ class CrewController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-<<<<<<< HEAD
-        ]);
-
-        Crew::create($validated);
-        return back()->with('success', 'Crew member added successfully.');
-=======
             'movies' => 'nullable|array',
             'movies.*.movie_id' => 'required|exists:movies,id',
             'movies.*.role_id' => 'required|exists:crew_roles,id',
@@ -116,6 +101,5 @@ class CrewController extends Controller
 
         $role->delete();
         return back()->with('success', 'Role deleted successfully.');
->>>>>>> 6e22249051c96f03f5b85cb386105d8d06e856a7
     }
 }

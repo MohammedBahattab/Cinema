@@ -50,9 +50,13 @@
                             <div class="fw-bold text-success">${{ number_format($booking->payments->sum('amount'), 2) }}</div>
                         </td>
                         <td>
-                            <span class="badge bg-success bg-opacity-20 text-success border border-success rounded-pill px-3 py-2">
-                                {{ ucfirst($booking->status) }}
-                            </span>
+                        @if($booking->status == 'confirmed')
+                          <span class="badge bg-success text-white border border-success rounded-pill px-3 py-2">Confirmed</span>
+                         @elseif($booking->status == 'pending')
+                          <span class="badge bg-warning text-white border border-warning rounded-pill px-3 py-2">Pending</span>
+                         @else
+                          <span class="badge bg-danger text-white border border-danger rounded-pill px-3 py-2">{{ ucfirst($booking->status) }}</span>
+                         @endif
                         </td>
                         <td class="text-end pe-4">
                             <div class="d-flex justify-content-end gap-2">

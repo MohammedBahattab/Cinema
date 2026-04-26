@@ -14,11 +14,7 @@
 <div class="row g-4 mb-5">
     <div class="col-md-6 col-xl-3">
         <div class="stat-card">
-<<<<<<< HEAD
-            <div class="stat-icon" style="background: rgba(59, 130, 246, 0.1); color: #3b82f6;">
-=======
             <div class="stat-icon stat-movies">
->>>>>>> 6e22249051c96f03f5b85cb386105d8d06e856a7
                 <i class="fas fa-film"></i>
             </div>
             <div class="stat-content">
@@ -29,11 +25,7 @@
     </div>
     <div class="col-md-6 col-xl-3">
         <div class="stat-card">
-<<<<<<< HEAD
-            <div class="stat-icon" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">
-=======
             <div class="stat-icon stat-showtimes">
->>>>>>> 6e22249051c96f03f5b85cb386105d8d06e856a7
                 <i class="fas fa-calendar-check"></i>
             </div>
             <div class="stat-content">
@@ -44,11 +36,7 @@
     </div>
     <div class="col-md-6 col-xl-3">
         <div class="stat-card">
-<<<<<<< HEAD
-            <div class="stat-icon" style="background: rgba(245, 158, 11, 0.1); color: #f59e0b;">
-=======
             <div class="stat-icon stat-bookings">
->>>>>>> 6e22249051c96f03f5b85cb386105d8d06e856a7
                 <i class="fas fa-ticket-alt"></i>
             </div>
             <div class="stat-content">
@@ -59,11 +47,7 @@
     </div>
     <div class="col-md-6 col-xl-3">
         <div class="stat-card">
-<<<<<<< HEAD
-            <div class="stat-icon" style="background: rgba(139, 92, 246, 0.1); color: #8b5cf6;">
-=======
             <div class="stat-icon stat-halls">
->>>>>>> 6e22249051c96f03f5b85cb386105d8d06e856a7
                 <i class="fas fa-door-open"></i>
             </div>
             <div class="stat-content">
@@ -99,11 +83,7 @@
                                 <td class="ps-4 fw-bold">#{{ str_pad($booking->id, 6, '0', STR_PAD_LEFT) }}</td>
                                 <td>
                                     <div class="d-flex align-items-center gap-2">
-<<<<<<< HEAD
-                                        <div class="bg-secondary rounded-circle d-flex align-items-center justify-content-center" style="width:32px;height:32px;font-size:0.8rem;">
-=======
                                         <div class="bg-secondary rounded-circle d-flex align-items-center justify-content-center user-avatar-sm">
->>>>>>> 6e22249051c96f03f5b85cb386105d8d06e856a7
                                             <i class="fas fa-user"></i>
                                         </div>
                                         <div>
@@ -122,11 +102,11 @@
                                 </td>
                                 <td>
                                     @if($booking->status == 'confirmed')
-                                        <span class="badge bg-success bg-opacity-20 text-success border border-success rounded-pill px-3 py-2">Confirmed</span>
+                                        <span class="badge bg-success text-white border border-success rounded-pill px-3 py-2">Confirmed</span>
                                     @elseif($booking->status == 'pending')
-                                        <span class="badge bg-warning bg-opacity-20 text-warning border border-warning rounded-pill px-3 py-2">Pending</span>
+                                        <span class="badge bg-warning text-white border border-warning rounded-pill px-3 py-2">Pending</span>
                                     @else
-                                        <span class="badge bg-danger bg-opacity-20 text-danger border border-danger rounded-pill px-3 py-2">{{ ucfirst($booking->status) }}</span>
+                                        <span class="badge bg-danger text-white border border-danger rounded-pill px-3 py-2">{{ ucfirst($booking->status) }}</span>
                                     @endif
                                 </td>
                             </tr>

@@ -1,17 +1,45 @@
 :root {
+    /* ── الألوان الأساسية (Colors) ── */
     --bg-primary: #0a0a1a;
     --bg-secondary: #12122a;
-    --bg-card: rgba(255, 255, 255, 0.04);
     --accent: #e50914;
     --accent-hover: #ff1a25;
     --gold: #f5c518;
     --text-primary: #ffffff;
     --text-secondary: #8b8b9e;
+    --text-muted: #6c757d;
+
+    /* ── ألوان الحالات (States) ── */
+    --color-available: #a0aec0;
+    --color-available-hover: #4a5568;
+    --color-booked: #e53e3e;
+    --color-selected: #24b749;
+    --color-success: #4ade80;
+
+    /* ── الشفافية والزجاج (Glassmorphism & Alpha) ── */
+    --bg-card: rgba(255, 255, 255, 0.04);
     --glass: rgba(255, 255, 255, 0.06);
+    --glass-focus: rgba(255, 255, 255, 0.08);
     --glass-border: rgba(255, 255, 255, 0.08);
+    --nav-bg: rgba(10, 10, 26, 0.85);
+    --card-overlay: rgba(10, 10, 26, 0.95);
+    --badge-bg: rgba(0, 0, 0, 0.7);
+    --shadow-alpha-accent: rgba(229, 9, 20, 0.4);
+    --shadow-alpha-glow: rgba(229, 9, 20, 0.15);
+    --shadow-alpha-card: rgba(229, 9, 20, 0.2);
+    --shadow-alpha-screen: rgba(229, 9, 20, 0.5);
+    --border-accent-dim: rgba(229, 9, 20, 0.3);
+
+    /* ── التدرجات (Gradients) ── */
     --gradient-1: linear-gradient(135deg, #e50914 0%, #b20710 100%);
     --gradient-2: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    --shadow-glow: 0 0 40px rgba(229, 9, 20, 0.15);
+
+    /* ── الظلال (Shadows) ── */
+    --shadow-glow: 0 0 40px var(--shadow-alpha-glow);
+    --shadow-accent: 0 8px 25px var(--shadow-alpha-accent);
+    --shadow-card-hover: 0 20px 60px var(--shadow-alpha-card);
+    --shadow-screen: 0 0 30px var(--shadow-alpha-screen);
+    --shadow-focus: 0 0 0 3px var(--shadow-alpha-glow);
 }
 
 * {
@@ -30,7 +58,7 @@ body {
 
 /* ── Navbar ── */
 .navbar-cinema {
-    background: rgba(10, 10, 26, 0.85);
+    background: var(--nav-bg);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--glass-border);
@@ -78,7 +106,7 @@ body {
 
 .btn-accent:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(229, 9, 20, 0.4);
+    box-shadow: var(--shadow-accent);
     color: white;
 }
 
@@ -92,7 +120,7 @@ body {
 }
 
 .glass-card:hover {
-    border-color: rgba(229, 9, 20, 0.3);
+    border-color: var(--border-accent-dim);
     transform: translateY(-4px);
     box-shadow: var(--shadow-glow);
 }
@@ -109,7 +137,7 @@ body {
 
 .movie-card:hover {
     transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 20px 60px rgba(229, 9, 20, 0.2);
+    box-shadow: var(--shadow-card-hover);
     border-color: var(--accent);
 }
 
@@ -136,14 +164,14 @@ body {
     left: 0;
     right: 0;
     height: 60%;
-    background: linear-gradient(transparent, rgba(10, 10, 26, 0.95));
+    background: linear-gradient(transparent, var(--card-overlay));
 }
 
 .movie-card .rating-badge {
     position: absolute;
     top: 12px;
     right: 12px;
-    background: rgba(0, 0, 0, 0.7);
+    background: var(--badge-bg);
     backdrop-filter: blur(10px);
     padding: 4px 10px;
     border-radius: 8px;
@@ -174,7 +202,7 @@ body {
     border-radius: 50%;
     margin: 0 auto 2rem;
     width: 70%;
-    box-shadow: 0 0 30px rgba(229, 9, 20, 0.5);
+    box-shadow: var(--shadow-screen);
 }
 
 .screen-label {
@@ -187,45 +215,59 @@ body {
 }
 
 .seat-btn {
-    width: 38px;
-    height: 38px;
-    margin: 3px;
-    border-radius: 8px 8px 4px 4px;
-    border: none;
-    cursor: pointer;
-    display: inline-flex;
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: 0.7rem;
-    font-weight: 700;
+    cursor: pointer;
     transition: all 0.2s ease;
-    position: relative;
+    margin: 5px;
+    background: none;
+    border: none;
+    width: 40px;
+    height: 50px;
 }
 
-.seat-btn.available {
-    background: #1a3a2a;
-    color: #4ade80;
-    border: 1px solid #2d5a3d;
+.seat-icon {
+    font-size: 1.8rem;
+    display: block;
+    margin-bottom: 2px;
 }
 
-.seat-btn.available:hover {
-    background: #2d5a3d;
-    transform: scale(1.15);
+.seat-num {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: bold;
 }
 
-.seat-btn.booked {
-    background: #3a1a1a;
-    color: #666;
-    cursor: not-allowed;
-    border: 1px solid #4a2a2a;
+/* 1. المقعد المتاح */
+.seat-btn.available .seat-icon {
+    color: var(--color-available);
 }
-
-.seat-btn.selected {
-    background: var(--gradient-1);
-    color: white;
+.seat-btn.available:hover .seat-icon {
+    color: var(--color-available-hover);
     transform: scale(1.1);
-    box-shadow: 0 4px 15px rgba(229, 9, 20, 0.4);
 }
+
+/* 2. المقعد المحجوز */
+.seat-btn.booked .seat-icon,
+.seat-btn.booked .seat-num {
+    color: var(--color-booked);
+    cursor: not-allowed;
+}
+
+/* 3. المقعد المحدد حالياً */
+.seat-btn.selected .seat-icon,
+.seat-btn.selected .seat-num {
+    color: var(--color-selected);
+}
+
+/* كلاسات مساعدة للأيقونات */
+i.available { color: var(--color-available) !important; }
+i.booked    { color: var(--color-booked) !important; }
+i.selected  { color: var(--color-selected) !important; }
+
+.fa-couch { font-size: 2rem; }
 
 /* ── Section Headers ── */
 .section-header {
@@ -250,7 +292,7 @@ body {
 }
 
 .alert-cinema.success {
-    border-left: 4px solid #4ade80;
+    border-left: 4px solid var(--color-success);
 }
 
 .alert-cinema.danger {
@@ -259,7 +301,7 @@ body {
 
 /* ── Form Inputs ── */
 .form-cinema {
-    background: rgba(255, 255, 255, 0.04);
+    background: var(--bg-card);
     border: 1px solid var(--glass-border);
     border-radius: 10px;
     color: var(--text-primary);
@@ -268,9 +310,9 @@ body {
 }
 
 .form-cinema:focus {
-    background: rgba(255, 255, 255, 0.08);
+    background: var(--glass-focus);
     border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.15);
+    box-shadow: var(--shadow-focus);
     color: var(--text-primary);
 }
 
@@ -306,17 +348,9 @@ body {
     animation: fadeInUp 0.6s ease forwards;
 }
 
-.delay-1 {
-    animation-delay: 0.1s;
-}
-
-.delay-2 {
-    animation-delay: 0.2s;
-}
-
-.delay-3 {
-    animation-delay: 0.3s;
-}
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
 
 /* ── Utility Classes ── */
 .w-25px { width: 25px; }

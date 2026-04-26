@@ -8,10 +8,14 @@
         </a>
         <h2 class="fw-bold mb-0">Booking Details #{{ str_pad($booking->id, 8, '0', STR_PAD_LEFT) }}</h2>
     </div>
-    <div>
-        <span class="badge bg-success bg-opacity-20 text-success border border-success px-4 py-2 rounded-pill fs-6">
-            {{ strtoupper($booking->status) }}
-        </span>
+    <div class="mt-2">
+     @if($booking->status == 'confirmed')
+       <span class="badge bg-success text-white border border-success rounded-pill px-4 py-2">Confirmed</span>
+      @elseif($booking->status == 'pending')
+        <span class="badge bg-warning text-white border border-warning rounded-pill px-4 py-2">Pending</span>
+      @else
+        <span class="badge bg-danger text-white border border-danger rounded-pill px-4 py-2">{{ ucfirst($booking->status) }}</span>
+      @endif
     </div>
 </div>
 
@@ -98,7 +102,7 @@
                 <hr class="border-secondary">
                 <div class="d-flex justify-content-between align-items-center">
                     <span class="text-white fw-bold">Total Paid</span>
-                    <span class="fs-3 fw-bold text-accent">${{ number_format($booking->payments->sum('amount'), 2) }}</span>
+                    <span class="fs-3 fw-bold text-success">${{ number_format($booking->payments->sum('amount'), 2) }}</span>
                 </div>
                 <div class="mt-4">
                     @foreach($booking->payments as $payment)
