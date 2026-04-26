@@ -7,6 +7,9 @@
     --accent-hover: #ff1a25;
     --text-primary: #ffffff;
     --text-secondary: #8b8b9e;
+    --text-title:var(--text-primary);
+    --text-label: #c9c7c7;
+    --text-small: #fffb00;
     
     /* ── ألوان الإحصائيات (Stat Colors) ── */
     --stat-blue: #3b82f6;
@@ -187,6 +190,19 @@ body {
 }
 
 /* ── Forms & Buttons ── */
+
+h3{
+    color: var(--text-title);
+}
+
+label{
+    color: var(--text-label);
+}
+
+.text-muted-2{
+    color: var(--text-small);
+}
+
 .form-control,
 .form-select {
     background: var(--input-bg);
@@ -269,10 +285,11 @@ body {
 }
 
 /* تعديل خيارات الـ Select */
-.form-select option {
-    background-color: var(--bg-sidebar);
+.form-select option ,.form-control option{
+    background-color: var(--bg-secondary);
     color: var(--text-primary);
 }
+
 
 .form-control::placeholder {
     color: var(--text-box) !important;
