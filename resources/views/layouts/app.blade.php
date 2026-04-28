@@ -15,6 +15,10 @@
     <nav class="navbar-cinema">
         <div class="container d-flex justify-content-between align-items-center">
             <a href="{{ route('home') }}" class="brand-logo"><span>MDAR</span> Cinema</a>
+           <form action="{{ route('movies.search') }}" method="GET" class="d-flex">
+    <input class="form-control me-2" type="search" name="q" placeholder="Search movies...">
+    <button class="btn btn-outline-light">Search</button>
+</form>
             <div class="d-flex align-items-center gap-2">
                 @auth
                     @if(auth()->user()->role && auth()->user()->role->name === 'admin')

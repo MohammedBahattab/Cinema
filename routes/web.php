@@ -5,7 +5,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\MovieController;
+use App\Http\Controllers\MovieController;
+use App\Http\Controllers\Admin\MovieController as AdminMovieController;
 use App\Http\Controllers\Admin\StudioController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CrewController;
@@ -14,8 +15,8 @@ use App\Http\Controllers\Admin\ShowtimeController;
 
 // Public Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/search', [MovieController::class, 'search'])->name('movies.search');
 Route::get('/movies/{id}', [HomeController::class, 'showMovie'])->name('movies.show');
-
 // Auth Routes
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
@@ -33,7 +34,7 @@ Route::get('/bookings/{booking}/invoice', [BookingController::class, 'invoice'])
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     
-    Route::resource('movies', MovieController::class);
+    Route::resource('movies', AdminMovieController::class);
     Route::resource('bookings', \App\Http\Controllers\Admin\BookingController::class)->only(['index', 'show', 'destroy']);
     Route::resource('studios', StudioController::class)->except(['show']);
     

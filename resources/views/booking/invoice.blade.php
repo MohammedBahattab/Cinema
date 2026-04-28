@@ -73,7 +73,6 @@
                         <thead class="border-bottom border-secondary">
                             <tr>
                                 <th class="text-secondary pb-3">Ticket / Seat</th>
-                                <th class="text-secondary pb-3 text-center">Row</th>
                                 <th class="text-secondary pb-3 text-end">Price</th>
                             </tr>
                         </thead>
@@ -85,10 +84,9 @@
                                         <div class="bg-dark rounded p-2 text-center w-40px">
                                             <i class="fas fa-chair text-secondary"></i>
                                         </div>
-                                        <span class="fw-bold">Seat {{ $seat->seat_number }}</span>
+                                        <span class="fw-bold">{{ chr(64 + $seat->row_number) . $seat->seat_number }}</span>
                                     </div>
                                 </td>
-                                <td class="py-3 text-center text-white">{{ $seat->row_number }}</td>
                                 <td class="py-3 text-end fw-bold">${{ number_format($seat->pivot->price, 2) }}</td>
                             </tr>
                             @endforeach

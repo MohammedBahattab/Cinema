@@ -68,7 +68,7 @@
                             <option value="{{ $cat->id }}" {{ $movie->categories->contains($cat->id) ? 'selected' : '' }}>{{ $cat->name }}</option>
                         @endforeach
                     </select>
-                    <small class="text-muted">Hold Ctrl to select multiple.</small>
+                    <small class="text-muted-2">Hold Ctrl to select multiple.</small>
                 </div>
 
                 <div class="mb-3">
@@ -79,7 +79,7 @@
                         </div>
                     @endif
                     <input type="file" name="poster_image" class="form-control" accept="image/*">
-                    <small class="text-muted">Leave empty to keep current image.</small>
+                    <small class="text-muted-2">Leave empty to keep current image.</small>
                 </div>
 
                 <button type="submit" class="btn btn-warning w-100 mt-3">Update Movie</button>

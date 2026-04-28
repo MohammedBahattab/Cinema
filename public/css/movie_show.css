@@ -109,6 +109,7 @@
     padding: 1.5rem;
     transition: all 0.3s ease;
     display: flex;
+    flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
 }
@@ -117,6 +118,10 @@
     background: var(--showtime-hover-bg);
     border-color: var(--showtime-hover-border);
     transform: translateX(10px);
+}
+
+.showtime-card a {
+    white-space: nowrap; 
 }
 
 /* ── Utilities ── */

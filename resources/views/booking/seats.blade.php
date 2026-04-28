@@ -31,18 +31,18 @@
 
                     @foreach($rows as $rowNumber => $seats)
                         <div class="d-flex justify-content-center align-items-center mb-2">
-                            <span class="text-secondary fw-bold me-4 seat-row-label">{{ $rowNumber }}</span>
+                            <span class="text-secondary fw-bold me-4 seat-row-label">{{ chr(64 + $rowNumber) }}</span>
                             @foreach($seats as $seat)
                                 @php $isBooked = in_array($seat->id, $bookedSeats); @endphp
                                <div class="seat-btn {{ $isBooked ? 'booked' : 'available' }}" 
                                data-seat-id="{{ $seat->id }}"
-                               data-seat-num="{{ $rowNumber.$seat->seat_number }}"
+                               data-seat-num="{{ chr(64 + $rowNumber) . $seat->seat_number }}"
                                @if(!$isBooked) onclick="toggleSeat(this)" @endif>
                                <i class="fas fa-couch seat-icon"></i>
                                <span class="seat-num">{{ $seat->seat_number }}</span>
                             </div>
                             @endforeach
-                            <span class="text-secondary fw-bold ms-4 seat-row-label">{{ $rowNumber }}</span>
+                            <span class="text-secondary fw-bold me-4 seat-row-label"> {{ chr(64 + $rowNumber) }}</span>
                         </div>
                     @endforeach
                 </div>
