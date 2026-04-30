@@ -50,6 +50,30 @@
                     <textarea name="description" class="form-control" rows="3"></textarea>
                 </div>
 
+                 <div class="mb-3">
+   
+                 <label>Categories</label>
+   
+                 <select name="categories[]" class="form-control" multiple>
+   
+                 @foreach($categories as $cat)
+   
+                 <option value="{{ $cat->id }}"
+   
+                 {{ in_array($cat->id, old('categories', [])) ? 'selected' : '' }}>
+   
+                 {{ $cat->name }}
+   
+                </option>
+   
+                @endforeach
+   
+            </select>
+   
+            <small class="text-muted-2">Hold Ctrl to select multiple.</small>
+
+        </div>
+
                 <div class="mb-3">
                     <label>Studio</label>
                     <select name="studio_id" class="form-control">

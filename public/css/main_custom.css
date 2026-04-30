@@ -56,6 +56,11 @@ body {
     overflow-x: hidden;
 }
 
+.colortitile{
+
+    color: var(--accent);
+}
+
 /* ── Navbar ── */
 .navbar-cinema {
     background: var(--nav-bg);

@@ -1,0 +1,51 @@
+ :root {
+    --C0-search: #e0e0e0;
+    --C1-search: #f1f1f1;
+    --C2-search: #ffffff;
+    --C3-search: #bbb;
+    --C4-search: #555;
+    --C5-search: #6f42c1;
+    --C6-search: #59359a;
+    --C7-search: #007bff;
+    --C8-search: #0056b3;
+    --C9-search: #59359a;
+
+    --Shadow00-search: rgba(111, 66, 193, 0.2);
+    --Shadow01-search: rgba(0, 123, 255, 0.2);
+
+}
+ 
+ 
+ .tag-label {
+        padding: 6px 16px;
+        border: 1px solid var(--C0-search);
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+        background-color: var(--C2-search);
+        color: var(--C4-search);
+        font-size: 0.85rem;
+        display: inline-block;
+        user-select: none;
+    }
+
+    /* category active */
+    .category-checkbox:checked + .category-style {
+        background-color: var(--C5-search); 
+        color: var(--white);
+        border-color: var(--C6-search);
+        box-shadow: 0 3px 6px var(--Shadow00-search);
+    }
+
+    /* studio active */
+    .studio-checkbox:checked + .studio-style {
+        background-color: var(--C7-search);
+        color: var(--white);
+        border-color: var(--C8-search);
+        box-shadow: 0 3px 6px var(--Shadow01-search);
+    }
+
+    .tag-label:hover {
+        border-color: var(--C3-search);
+        background-color: var(--C1-search);
+    }

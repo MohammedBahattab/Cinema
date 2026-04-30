@@ -2,6 +2,10 @@
 
 @section('content')
 
+@push('styles')
+    <link href="{{ asset('css/search.css') }}" rel="stylesheet">
+@endpush
+
 <div class="container-fluid px-4">
 
     <!-- 🔍 البحث -->
@@ -65,42 +69,5 @@
 
     </div>
 </div>
-
-<!-- 🎨 CSS -->
-<style>
-    .tag-label {
-        padding: 6px 16px;
-        border: 1px solid #e0e0e0;
-        border-radius: 50px;
-        cursor: pointer;
-        transition: all 0.2s ease-in-out;
-        background-color: #ffffff;
-        color: #555;
-        font-size: 0.85rem;
-        display: inline-block;
-        user-select: none;
-    }
-
-    /* category active */
-    .category-checkbox:checked + .category-style {
-        background-color: #6f42c1; 
-        color: white;
-        border-color: #59359a;
-        box-shadow: 0 3px 6px rgba(111, 66, 193, 0.2);
-    }
-
-    /* studio active */
-    .studio-checkbox:checked + .studio-style {
-        background-color: #007bff;
-        color: white;
-        border-color: #0056b3;
-        box-shadow: 0 3px 6px rgba(0, 123, 255, 0.2);
-    }
-
-    .tag-label:hover {
-        border-color: #bbb;
-        background-color: #f1f1f1;
-    }
-</style>
 
 @endsection
