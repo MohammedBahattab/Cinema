@@ -14,7 +14,10 @@
     <!-- Navbar -->
     <nav class="navbar-cinema">
         <div class="container d-flex justify-content-between align-items-center">
-            <a href="{{ route('home') }}" class="brand-logo"><span>MDAR</span> Cinema</a>
+           <div class="d-flex align-items-center gap-2">
+           <img src="{{ asset('image/mc1.png') }}" alt="MDAR cinema logo" class="navbar-logo">
+           <a href="{{ route('home') }}" class="brand-logo"><span>MDAR</span> Cinema</a>
+        </div>
            <form action="{{ route('movies.search') }}" method="GET" class="d-flex">
     <input class="form-control me-2" type="search" name="q" placeholder="Search movies...">
     <button class="btn btn-outline-light">Search</button>

@@ -73,6 +73,18 @@ body {
     z-index: 1000;
 }
 
+.navbar-logo {
+    height: 40px;      /* حجم مناسب */
+    width: auto;
+    object-fit: contain;
+}
+
+.navbar-cinema .container {
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+}
+
 .navbar-cinema .brand-logo {
     font-size: 1.6rem;
     font-weight: 800;
