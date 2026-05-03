@@ -93,7 +93,11 @@ body {
     text-decoration: none;
 }
 
-.navbar-cinema .brand-logo span {
+.navbar-cinema .brand-logo span{
+    color: var(--accent);
+}
+
+.brand-logo {
     color: var(--accent);
 }
 

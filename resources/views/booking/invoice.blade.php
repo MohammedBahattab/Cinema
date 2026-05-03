@@ -21,8 +21,9 @@
             
             <div class="invoice-content">
                 <div class="invoice-header d-flex flex-wrap justify-content-between align-items-center gap-3">
-                    <div>
-                        <h3 class="fw-bold mb-0">MDAR <span class="text-accent">Cinema</span></h3>
+                    <div class="d-flex align-items-center gap-2">
+                        <img src="{{ asset('image/mc1.png') }}" alt="MDAR cinema logo" class="navbar-logo">
+                        <h3 class="fw-bold mb-0"> <span class="brand-logo">MDAR </span> Cinema</h3>
                         <small class="text-secondary">Premium Movie Experience</small>
                     </div>
                     <div class="text-end">
