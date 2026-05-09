@@ -8,12 +8,14 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    // عرض التصنيفات
     public function index()
     {
         $categories = Category::all();
         return view('admin.categories.index', compact('categories'));
     }
 
+    // انشاء وتخزين التصنيف
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -24,6 +26,7 @@ class CategoryController extends Controller
         return back()->with('success', 'Category added successfully.');
     }
 
+    // حذف التصنيف
     public function destroy(Category $category)
     {
         $category->delete();

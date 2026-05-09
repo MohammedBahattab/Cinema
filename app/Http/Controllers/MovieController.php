@@ -29,9 +29,9 @@ class MovieController extends Controller
         $query->where('rating', '>=', $request->rating);
     }
 
-    // 4. فلتر الاستوديوهات (التعديل الصحيح لموديل Movie)
+    // 4. فلتر الاستوديوهات 
     if ($request->filled('studios')) {
-        // نستخدم studio_id مباشرة لأنها موجودة في الـ fillable والجدول
+       
         $query->whereIn('studio_id', (array) $request->studios);
     }
 

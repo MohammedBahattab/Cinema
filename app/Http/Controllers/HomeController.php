@@ -10,14 +10,16 @@ class HomeController extends Controller
 {
     public function index()
     {
-      //  $movies = Movie::with('categories')->get();
-       // return view('home', compact('movies'));
+   ///عرض الافلام بناء على وقت العرض لنفس اليوم
 
                $todayMovies = Movie::whereHas('showtimes', function ($q) {
         $q->whereDate('show_date', Carbon::today());
     })->get();
 
+    //جلب الافلام عشوائيا
     $randomMovies = Movie::inRandomOrder()->take(8)->get();
+
+    //عرض الافلام بناء على تصنيف محدد مثل عائلي
 
     $catMovies = Movie::whereHas('categories', function ($q) {
         $q->where('name', 'Family');
@@ -27,6 +29,7 @@ class HomeController extends Controller
         return view('home', compact('todayMovies','randomMovies','catMovies'));
      }
 
+     //عرض الفيلم مع  التفاصيل مثل الاستديو و التصنيفات
     public function showMovie($id)
     {
         $movie = Movie::with(['studio', 'categories', 'crew', 'showtimes' => function($query) {

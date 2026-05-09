@@ -13,6 +13,7 @@ use Illuminate\Database\QueryException;
 
 class BookingController extends Controller
 {
+    //تحديد حجز المقاعد للفيلم
     public function selectSeats(Showtime $showtime)
     {
         $showtime->load(['movie', 'hall.seats']);
@@ -25,6 +26,7 @@ class BookingController extends Controller
         return view('booking.seats', compact('showtime', 'bookedSeats'));
     }
 
+    //عرض بيانات الحجز مثل السعر والعدد وتاكيد الحجز
     public function checkout(Request $request, Showtime $showtime)
     {
         $request->validate([
@@ -38,6 +40,8 @@ class BookingController extends Controller
         return view('booking.checkout', compact('showtime', 'seats', 'totalPrice'));
     }
 
+    //تخزين بيانات المستخدم للحجز
+
     public function store(Request $request, Showtime $showtime)
     {
         // Validation handles guest user fields if not authenticated
@@ -45,6 +49,8 @@ class BookingController extends Controller
             'seats' => 'required|array|min:1',
             'seats.*' => 'exists:seats,id',
         ];
+
+        //التحقق من بيانات المستخدم
 
         if (!Auth::check()) {
             $rules['full_name'] = 'required|string|max:255';
@@ -62,8 +68,11 @@ class BookingController extends Controller
             $userId = null;
             $guestUserId = null;
 
+            //اذا كان مستخدم موجود 
+
             if (Auth::check()) {
                 $userId = Auth::id();
+                //اذا كان المستخدم مسجل ضيف
             } else {
                 $guestUser = GuestUser::create([
                     'full_name' => $validated['full_name'],
@@ -73,6 +82,7 @@ class BookingController extends Controller
                 ]);
                 $guestUserId = $guestUser->id;
             }
+            //عملية انشاء الحجز وحاله الحجز
 
             $booking = Booking::create([
                 'user_id' => $userId,
@@ -81,6 +91,7 @@ class BookingController extends Controller
                 'status' => 'confirmed'
             ]);
 
+            //معلومات الحجز وعدد الحجز , السعر الاجمالي
             $totalAmount = 0;
             $bookingSeats = [];
             foreach ($seats as $seatId) {
@@ -95,7 +106,7 @@ class BookingController extends Controller
                 $totalAmount += $showtime->price;
             }
 
-            // This will throw QueryException if duplicate unique constraint is hit
+            // بوابة دفع وهمية للدفع المباشر
             DB::table('booking_seats')->insert($bookingSeats);
 
             Payment::create([
@@ -125,6 +136,7 @@ class BookingController extends Controller
         }
     }
 
+    //عرض معلومات الحجز (فاتورة)
     public function invoice(Booking $booking)
     {
         $booking->load(['user', 'guestUser', 'showtime.movie', 'showtime.hall', 'seats', 'payments']);

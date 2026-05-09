@@ -8,12 +8,12 @@
 
 <div class="container-fluid px-4">
 
-    <!-- 🔍 البحث -->
+    <!-- البحث -->
     <input type="text" id="searchInput" class="form-control mb-4" placeholder="Search movies...">
 
     <div class="row">
 
-        <!-- 🎛 الفلاتر (يسار) -->
+        <!-- الفلاتر  -->
         <div class="col-lg-3">
             <div class="glass-card p-3">
 
@@ -60,7 +60,7 @@
             </div>
         </div>
 
-        <!-- 🎬 النتائج (يمين) -->
+        <!-- النتائج -->
         <div class="col-lg-9">
             <div id="results">
                 @include('movies.partials.results', ['gridClass' => 'col-12 col-md-6 col-xl-4'])

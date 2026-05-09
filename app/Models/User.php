@@ -11,14 +11,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<UserFactory> */
+
     use HasFactory, Notifiable, SoftDeletes;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
+    // الحقول المسموح بتعبئتها دفعة واحدة
     protected $fillable = [
         'name',
         'email',
@@ -28,21 +24,13 @@ class User extends Authenticatable
         'phone_number',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
+    // اخفاء كلمات السر  وامكانية التذكر
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
+    // مصفوفة تحويل انواع البيانات تقوم بتحويل قيم الحقول تلقائياً عند جلبها من قاعدة البيانات أو تخزينها
     protected function casts(): array
     {
         return [
@@ -51,11 +39,13 @@ class User extends Authenticatable
         ];
     }
 
+    // كل مستخدم ينتمي الى صلاحية دور محدد
     public function role()
     {
         return $this->belongsTo(Role::class);
     }
 
+    // يمكن للمستخم ان ينتمي لعده حجوزات
     public function bookings()
     {
         return $this->hasMany(Booking::class);

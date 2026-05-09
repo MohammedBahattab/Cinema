@@ -10,11 +10,12 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+    // عرض تسجيل الدخول
     public function showLogin()
     {
         return view('auth.login');
     }
-
+    // تسجيل حساب موجود
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -22,6 +23,7 @@ class AuthController extends Controller
             'password' => ['required'],
         ]);
 
+        // تحقق اذا كان مسؤول
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
@@ -37,6 +39,7 @@ class AuthController extends Controller
         ])->onlyInput('email');
     }
 
+    //انشاء حساب
     public function showRegister()
     {
         return view('auth.register');
@@ -68,6 +71,7 @@ class AuthController extends Controller
         return redirect('/');
     }
 
+    // تسجيل الخروج
     public function logout(Request $request)
     {
         Auth::logout();

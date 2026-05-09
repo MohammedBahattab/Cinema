@@ -22,6 +22,7 @@ class DashboardController extends Controller
             'showtime.movie' => function($q) { $q->withTrashed(); }
         ])->latest()->take(5)->get();
 
+        // عرض اجمالي البيانات الخاصه بالنظام
         return view('admin.dashboard', compact(
             'totalMovies', 'totalShowtimes', 'totalBookings', 'totalHalls', 'recentBookings'
         ));

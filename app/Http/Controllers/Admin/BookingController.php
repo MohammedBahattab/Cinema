@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class BookingController extends Controller
 {
+    // عرض الحجوزات ومعلوماتهم
     public function index()
     {
         $bookings = Booking::with([
@@ -23,6 +24,8 @@ class BookingController extends Controller
         return view('admin.bookings.index', compact('bookings'));
     }
 
+    // عرض تفاصيل حجز محدد مع معلوماته
+
     public function show(Booking $booking)
     {
         $booking->load([
@@ -36,6 +39,7 @@ class BookingController extends Controller
         return view('admin.bookings.show', compact('booking'));
     }
 
+    // حذف او الغاء الحجز
     public function destroy(Booking $booking)
     {
         $booking->delete();

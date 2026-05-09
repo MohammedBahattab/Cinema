@@ -1,6 +1,7 @@
 @include('movies.partials.movie_list')
 
 <script>
+    // دالة جلب الأفلام: تقوم بجمع كافة الفلاتر وإرسال طلب
 function fetchMovies() {
     const params = new URLSearchParams();
     
@@ -9,6 +10,7 @@ function fetchMovies() {
     const year = document.getElementById('year').value;
     const rating = document.getElementById('rating').value;
 
+    // إضافة القيم للرابط فقط إذا كانت غير فارغة
     if (q) params.append('q', q);
     if (year) params.append('year', year);
     if (rating) params.append('rating', rating);
@@ -33,12 +35,12 @@ function fetchMovies() {
     });
 }
 
-// ربط الأحداث
+// تحديث البيانات عند ادخال بحث, سنة , تقييم
 document.getElementById('searchInput').addEventListener('keyup', fetchMovies);
 document.getElementById('year').addEventListener('change', fetchMovies);
 document.getElementById('rating').addEventListener('input', fetchMovies);
 
-// تفعيل المستمع لكل الـ Checkboxes المخفية
+// مراقبة التغييرات عند التعليم على الفلاتر 
 document.addEventListener('change', function(e) {
     if (e.target.classList.contains('filter')) {
         fetchMovies();

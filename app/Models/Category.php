@@ -9,8 +9,10 @@ class Category extends Model
 {
     use HasFactory;
 
+    // الحقول المسموح بتعبئتها دفعة واحدة
     protected $fillable = ['name'];
 
+    // التصنيفات تنتمي الى عده افلام
     public function movies()
     {
         return $this->belongsToMany(Movie::class, 'movie_category');

@@ -9,17 +9,21 @@ use Illuminate\Http\Request;
 
 class HallController extends Controller
 {
+    // عرض الصالات
     public function index()
     {
         $halls = Hall::all();
         return view('admin.halls.index', compact('halls'));
     }
 
+    // انشاء الصالة
+
     public function create()
     {
         return view('admin.halls.create');
     }
 
+    // تخزين بياناتها
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -30,7 +34,7 @@ class HallController extends Controller
 
         $hall = Hall::create($validated);
 
-        // Auto-generate seats for the hall
+        // انشاء عدد المقاعد تلقائيا بناء على عدد الصفوف والاعمدة
         $seatsToInsert = [];
         for ($r = 1; $r <= $validated['total_rows']; $r++) {
             for ($s = 1; $s <= $validated['seats_per_row']; $s++) {
@@ -48,12 +52,15 @@ class HallController extends Controller
         return redirect()->route('admin.halls.index')->with('success', 'Hall and seats created successfully.');
     }
 
+    // عرض الصالة مع المقاعد
+
     public function show(Hall $hall)
     {
         $hall->load('seats');
         return view('admin.halls.show', compact('hall'));
     }
 
+    // حذف الصالة
     public function destroy(Hall $hall)
     {
         $hall->delete();

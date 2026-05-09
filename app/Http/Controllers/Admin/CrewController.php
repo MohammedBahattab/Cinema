@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 
 class CrewController extends Controller
 {
+    // عرض بيانات طاقم العمل وادوارهم
     public function index()
     {
         $crews = Crew::with('movies')->get();
@@ -18,15 +19,19 @@ class CrewController extends Controller
         return view('admin.crew.index', compact('crews', 'roles', 'movies'));
     }
 
+    //  انشاء وتخزين دور الشخص مثل: ممثل , مخرج
     public function storeRole(Request $request)
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255|unique:crew_roles,name',
         ]);
 
+
         CrewRole::create($validated);
         return back()->with('success', 'Role added successfully.');
     }
+
+     // اضافة الشخص مع تحديد دوره والفيلم
 
     public function storeCrew(Request $request)
     {
@@ -50,6 +55,7 @@ class CrewController extends Controller
         return back()->with('success', 'Crew member and movie associations added successfully.');
     }
 
+    // عرض الشخص و دوره والفيلم
     public function edit(Crew $crew)
     {
         $crew->load('movies');
@@ -58,6 +64,7 @@ class CrewController extends Controller
         return view('admin.crew.edit', compact('crew', 'roles', 'movies'));
     }
 
+    // تحديث البيانات
     public function update(Request $request, Crew $crew)
     {
         $validated = $request->validate([
@@ -69,13 +76,11 @@ class CrewController extends Controller
 
         $crew->update(['name' => $validated['name']]);
 
-        // Sync associations: Prepare data for sync
+        // مزامنة البيانات في حال اضافة اكثر من فيلم لنفس الشخص
         $syncData = [];
         if (!empty($validated['movies'])) {
             foreach ($validated['movies'] as $movieData) {
-                // Since a person can have multiple roles in the SAME movie, 
-                // standard sync() might not work perfectly if we want duplicates.
-                // But for simplicity, we'll assume unique (movie, role) per person.
+            
                 $syncData[$movieData['movie_id']] = ['crew_role_id' => $movieData['role_id']];
             }
         }
@@ -85,15 +90,18 @@ class CrewController extends Controller
         return redirect()->route('admin.crew.index')->with('success', 'Crew member updated successfully.');
     }
 
+
+    // حذف الشخص 
     public function destroy(Crew $crew)
     {
-        $crew->delete(); // This will also delete pivot entries if defined correctly or use cascade
+        $crew->delete(); 
         return back()->with('success', 'Crew member deleted successfully.');
     }
 
+    // حذف الدور المحدد
     public function destroyRole(CrewRole $role)
     {
-        // Check if role is in use
+        // التحقق اذا كان هناك شخص يستخدم هذا الدور
         $count = \DB::table('movie_crew')->where('crew_role_id', $role->id)->count();
         if ($count > 0) {
             return back()->with('error', 'Cannot delete role. It is currently assigned to ' . $count . ' crew associations.');

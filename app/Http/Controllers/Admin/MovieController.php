@@ -10,12 +10,14 @@ use Illuminate\Http\Request;
 
 class MovieController extends Controller
 {
+    // عرض صفحة الفيلم 
     public function index()
     {
         $movies = Movie::with('studio', 'categories')->get();
         return view('admin.movies.index', compact('movies'));
     }
 
+    // انشاء الفيلم مع تحديد الاستديو و التصنيفات
     public function create()
     {
         $studios = Studio::all();
@@ -23,6 +25,7 @@ class MovieController extends Controller
         return view('admin.movies.create', compact('studios', 'categories'));
     }
 
+    // تخزين بيانات الخاصه بالفيلم
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -43,6 +46,7 @@ class MovieController extends Controller
             $validated['poster_image'] = $request->file('poster_image')->store('movies', 'public');
         }
 
+        // دالة الانشاء
         $movie = Movie::create($validated);
 
         if (!empty($validated['categories'])) {
@@ -52,12 +56,15 @@ class MovieController extends Controller
         return redirect()->route('admin.movies.index')->with('success', 'Movie created successfully.');
     }
 
+    // دالة التعديل
     public function edit(Movie $movie)
     {
         $studios = Studio::all();
         $categories = Category::all();
         return view('admin.movies.edit', compact('movie', 'studios', 'categories'));
     }
+
+    // تحديث وتعديل بيانات الفيلم
 
     public function update(Request $request, Movie $movie)
     {
@@ -76,7 +83,7 @@ class MovieController extends Controller
         ]);
 
         if ($request->hasFile('poster_image')) {
-            // Delete old image if it exists and is stored locally
+            // حذف الصورة الخاصه بالفيلم عند اضافة صورة جديده حتى يتم الاستبدال
             if ($movie->poster_image && !str_starts_with($movie->poster_image, 'http')) {
                 \Illuminate\Support\Facades\Storage::disk('public')->delete($movie->poster_image);
             }
@@ -96,6 +103,7 @@ class MovieController extends Controller
         return redirect()->route('admin.movies.index')->with('success', 'Movie updated successfully.');
     }
 
+    // حذف الفيلم نهائيا
     public function destroy(Movie $movie)
     {
         $movie->delete();

@@ -9,5 +9,6 @@ class CrewRole extends Model
 {
     use HasFactory;
 
+    // الحقول المسموح بتعبئتها دفعة واحدة
     protected $fillable = ['name'];
 }

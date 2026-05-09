@@ -13,24 +13,24 @@ use App\Http\Controllers\Admin\CrewController;
 use App\Http\Controllers\Admin\HallController;
 use App\Http\Controllers\Admin\ShowtimeController;
 
-// Public Routes
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/search', [MovieController::class, 'search'])->name('movies.search');
-Route::get('/movies/{id}', [HomeController::class, 'showMovie'])->name('movies.show');
-// Auth Routes
-Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
-Route::post('/login', [AuthController::class, 'login']);
-Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+// عام للجميع
+Route::get('/', [HomeController::class, 'index'])->name('home'); // الصفحة الرئيسية
+Route::get('/search', [MovieController::class, 'search'])->name('movies.search'); // البحث عن الاسم
+Route::get('/movies/{id}', [HomeController::class, 'showMovie'])->name('movies.show'); // عرض تفاصيل فيلم محدد
+// خاص بالتسجيل
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login'); // عرض صفحة تسجيل الدخول
+Route::post('/login', [AuthController::class, 'login']); // عملية التسجيل
+Route::get('/register', [AuthController::class, 'showRegister'])->name('register'); // عرض صفحة انشاء الحساب
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// Booking Flow
+// الحجز
 Route::get('/showtimes/{showtime}/seats', [BookingController::class, 'selectSeats'])->name('booking.seats');
 Route::post('/showtimes/{showtime}/checkout', [BookingController::class, 'checkout'])->name('booking.checkout');
 Route::post('/showtimes/{showtime}/store', [BookingController::class, 'store'])->name('booking.store');
 Route::get('/bookings/{booking}/invoice', [BookingController::class, 'invoice'])->name('booking.invoice');
 
-// Admin Routes
+// خاص بالادمين
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     
@@ -38,10 +38,12 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::resource('bookings', \App\Http\Controllers\Admin\BookingController::class)->only(['index', 'show', 'destroy']);
     Route::resource('studios', StudioController::class)->except(['show']);
     
+    // مسارات إدارة التصنيفات (Categories)
     Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
     Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
     Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
     
+    // مسارات إدارة طاقم العمل (Crew) وأدوارهم
     Route::get('/crew', [CrewController::class, 'index'])->name('crew.index');
     Route::post('/crew/role', [CrewController::class, 'storeRole'])->name('crew.storeRole');
     Route::delete('/crew/role/{role}', [CrewController::class, 'destroyRole'])->name('crew.destroyRole');
@@ -50,6 +52,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::put('/crew/member/{crew}', [CrewController::class, 'update'])->name('crew.update');
     Route::delete('/crew/member/{crew}', [CrewController::class, 'destroy'])->name('crew.destroy');
     
+    // إدارة القاعات وأوقات العرض
     Route::resource('halls', HallController::class)->except(['edit', 'update']);
     Route::resource('showtimes', ShowtimeController::class)->only(['index', 'create', 'store', 'destroy']);
 });
